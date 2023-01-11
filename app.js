@@ -20,7 +20,7 @@ require('dotenv').config();
 var mongoose = require('mongoose');
 
 
-var dbURL = process.env.DATABASE_URL;
+var dbURL = "mongodb+srv://user123:user123@cluster0.ktn6e7j.mongodb.net/?retryWrites=true&w=majority";
 console.log(dbURL);
 
 mongoose.set('strictQuery', false)
