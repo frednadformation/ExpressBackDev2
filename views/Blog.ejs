@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire</title>
+    <!-- Bootstrap -->
+    <%- include('partials/Bootstrap.ejs') %> 
+</head>
+<body>
+    <%- include('partials/Navbar.ejs') %>
+    <div class="container">
+        <form action="/new-post" method="post">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" name="title"  placeholder="ex:Alice au pays des merveilles">
+                <label for="floatingInput">Titre du post</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" name="author" placeholder="ex: John Doe">
+                <label for="floatingInput">Auteur</label>
+            </div>
+            <div class="form-floating">
+                <textarea class="form-control" id="floatingTextarea2" name="desc" placeholder="Leave a comment here" style="height: 100px">
+                </textarea>
+                <label for="floatingTextarea2">Description</label>
+            </div>
+            <div class="d-grid gap-2">
+                <input type="submit" class="btn btn-success" value="Creer un post">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <%- include('partials/Bootstrap.ejs') %> 
+
+    <title>Document</title>
+</head>
+<body>
+
+    <%- include('partials/Navbar.ejs') %> 
+    <h1 class="text-center">Bienvenue sur la page</h1>
+    <h2 class="text-center text-decoration-underline">Voici les posts :</h1>
+
+    <div class="container">
+        <% data.forEach( post => {%>
+    
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title"><%= post.titre%></h5>
+              <h6 class="card-subtitle mb-2 text-muted"><%= post.auteur %></h6>
+              <p class="card-text"><%= post.description %></p>
+
+              <div class="d-flex justify-content-between">
+                <a href="/allposts/<%=post._id%>" class="card-link">
+                    <button type="button" class="btn btn-warning">Edit</button>
+                </a>
+                <form action="/allposts/delete/<%= post._id %>?_method=DELETE" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="submit" class="btn btn-danger" value="Supprimer">
+                </form>
+              </div>
+            </div>
+          </div>
+    
+          <% });%>
+
+    </div>
+
+
+
+</body>
+</html>
