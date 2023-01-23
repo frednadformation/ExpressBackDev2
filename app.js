@@ -9,6 +9,14 @@ var path = require('path');
 
 app.set('view engine', 'ejs');
 
+const cors = require('cors');
+app.use(cors());
+
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
+const {createToken, validateToken} = require('./JWT');
+
 const bcrypt = require('bcrypt');
 
 var Pseudo = require('./models/pseudo');
@@ -60,7 +68,8 @@ app.get('/home', function(req, res){
 
 app.get('/', function(req, res){
     Contact.find().then(data => {
-        res.render('Home', {data: data})
+        // res.render('Home', {data: data})
+        res.json({data: data})
     }).catch(err => { console.log(err) });
 
 });
@@ -160,7 +169,8 @@ app.post('/new-post', function(req,res){
 
 app.get('/allposts', function(req, res){
     Post.find().then(data => {
-        res.render('AllPost', {data: data})
+        // res.render('AllPost', {data: data})
+        res.json({data: data});
     }).catch(err => console.log(err));
 });
 
