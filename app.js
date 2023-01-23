@@ -167,7 +167,7 @@ app.post('/new-post', function(req,res){
 
 }); 
 
-app.get('/allposts', function(req, res){
+app.get('/allposts',validateToken, function(req, res){
     Post.find().then(data => {
         // res.render('AllPost', {data: data})
         res.json({data: data});
@@ -219,7 +219,7 @@ app.post('/api/signup', function (req, res) {
 
     Data.save().then(() =>{
         console.log("User saved");
-        res.redirect('/');
+        res.redirect('http://localhost:3000/');
     }).catch(err => console.log(err));
 })
 
@@ -237,13 +237,18 @@ app.post('/api/signin', function(req, res) {
             res.status(404).send('Email Invalid !');
         }
 
+        const accessToken = createToken(user);
+
+        res.cookie("access-token", accessToken, {maxAge: 60*60*24*30*12, httpOnly:true})
+
         // if(user.password !== req.body.password){
         //     res.status(404).send('Password Invalid !');
         // }
         if(!bcrypt.compareSync(req.body.password, user.password)){
             res.status(404).send('Password Invalid !');
         }
-        res.render('UserPage', {data: user});
+        // res.render('UserPage', {data: user});
+        res.json("LOGGED IN !");
     }).catch(err => {console.log(err)});
 });
 
